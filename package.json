@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "cordova build",
+    "deploy:ios": "cordova build ios",
+    "deploy:android": "cordova build android"
   },
   "repository": {
     "type": "git",
