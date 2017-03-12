@@ -14,8 +14,12 @@ class CreatePrayer extends Component {
 	static navigationOptions = {
 		title: 'Create Prayer',
   }
-  componentDidMount () {
-    //this.refs.prayerForm.refs.textInputRef.focus()
+  constructor () {
+    super()
+    this.onSave = this.onSave.bind(this)
+  }
+  onSave () {
+    console.log('state: ', this.state);
   }
   render () {
 		const {navigate} = this.props.navigation;
@@ -24,16 +28,15 @@ class CreatePrayer extends Component {
 
         <FormLabel containerStyle={styles.labelContainerStyle}>Pray for:</FormLabel>
         <FormInput 
+          onChangeText={(text) => this.setState({ prayFor: text })}
           placeholder='Pray for...' 
-          ref='prayerForm'
-          textInputRef='prayFor'
         />
 
         <FormLabel containerStyle={styles.labelContainerStyle}>Description:</FormLabel>
-        <FormInput ref='prayerForm' textInputRef='prayerDesc' />
+        <FormInput onChangeText={(text) => this.setState({ prayerDesc: text })} />
 
         <Button
-          onPress={() => navigate('PrayerList', {})}
+          onPress={() => { this.onSave(); navigate('PrayerList', {}) }}
           title="Save"
         />
         <Button
