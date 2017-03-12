@@ -1,9 +1,9 @@
 import React from 'react'
 import { AppRegistry } from 'react-native'
-import AppRootContainer from './src/AppRootContainer'
+import App from './src/App'
 
 const HackathonStarter = () => (
-  <AppRootContainer />
+  <App />
 )
 
 AppRegistry.registerComponent('HackathonStarter', () => HackathonStarter)
