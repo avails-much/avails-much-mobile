@@ -32,9 +32,7 @@ class CreatePrayer extends Component {
   }
   onSave () {
     const { onCreatePrayer } = this.props;
-    console.log('props: ', this.props);
-    console.log('state: ', this.state);
-    onCreatePrayer({ title: 'YAY!!!!' });
+    onCreatePrayer({ title: this.state.prayFor, description: this.state.prayerDesc });
   }
   render () {
 		const {navigate} = this.props.navigation;
