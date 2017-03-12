@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { View, Image, StyleSheet, ScrollView, ListView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 let styles
+import { createPrayer } from '../actions';
 
 import {
 	Button,
@@ -9,6 +11,16 @@ import {
   FormLabel,
   FormInput,
 } from 'react-native-elements'
+
+function mapStateToProps (state) {
+  return {}
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    onCreatePrayer: (prayerReq) => dispatch(createPrayer(prayerReq))
+  }
+}
 
 class CreatePrayer extends Component {
 	static navigationOptions = {
@@ -19,7 +31,10 @@ class CreatePrayer extends Component {
     this.onSave = this.onSave.bind(this)
   }
   onSave () {
+    const { onCreatePrayer } = this.props;
+    console.log('props: ', this.props);
     console.log('state: ', this.state);
+    onCreatePrayer({ title: 'YAY!!!!' });
   }
   render () {
 		const {navigate} = this.props.navigation;
@@ -57,4 +72,4 @@ styles = StyleSheet.create({
   }
 });
 
-export default CreatePrayer;
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePrayer)

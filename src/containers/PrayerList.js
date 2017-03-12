@@ -66,7 +66,7 @@ class PrayerList extends Component {
         </List>
       </ScrollView>
 			<Button
-				onPress={() => navigate('CreatePrayer', {})}
+				onPress={() => navigate('CreatePrayer', { })}
 				title="Add Prayer"
 			/>
 			</View>
