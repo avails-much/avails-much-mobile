@@ -9,7 +9,11 @@ npm install -g react-native
 Clone the repository
 
 ```
-git clone git@github.com:dabit3/react-native-hackathon-starter.git
+git@github.com:reverentgeek/availsmuch-mobile.git
+```
+
+```
+cd availsmuch-mobile
 ```
 
 Install dependencies
