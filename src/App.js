@@ -6,7 +6,7 @@ import fonts from 'HSFonts'
 import { StackNavigator } from 'react-navigation';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 
 import Home from './home/HomeNav'
 import About from './about/AboutRootContainer'
@@ -20,7 +20,17 @@ import CreatePrayer from './components/CreatePrayer';
 
 import appReducer from './reducers'
 
-let store = createStore(appReducer)
+import createLogger from 'redux-logger';
+
+const logger = createLogger();
+
+const store = createStore(
+  appReducer,
+  compose(
+    applyMiddleware(logger),
+  )
+);
+console.log('STATE IS: ', store.getState());
 
 let styles = {}
 

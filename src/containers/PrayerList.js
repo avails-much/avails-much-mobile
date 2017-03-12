@@ -14,7 +14,7 @@ import {
 
 function mapStateToProps (state) {
   return {
-    prayerList: state.app.prayerList
+    prayerList: state.app.get('prayerList').toJS()
   }
 }
 
@@ -31,10 +31,10 @@ class PrayerList extends Component {
 
   constructor () {
     super()
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    this.state = {
-      dataSource: ds.cloneWithRows(this.props.prayerList)
-    }
+    /*const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})*/
+    /*this.state = {*/
+    /*dataSource: ds.cloneWithRows(this.props.prayerList)*/
+    /*}*/
     this.renderRow = this.renderRow.bind(this)
   }
 
@@ -51,13 +51,17 @@ class PrayerList extends Component {
 
   render () {
 		const {navigate} = this.props.navigation;
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const dataSource = ds.cloneWithRows(this.props.prayerList)
+
     return (
 			<View>
       <ScrollView keyboardShouldPersistTaps="always" style={styles.mainContainer}>
         <List>
           <ListView
             renderRow={this.renderRow}
-            dataSource={this.state.dataSource}
+            dataSource={dataSource}
             />
         </List>
       </ScrollView>
@@ -76,5 +80,4 @@ styles = StyleSheet.create({
   }
 });
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ContactNav)
-export default PrayerList;
+export default connect(mapStateToProps, mapDispatchToProps)(PrayerList)
