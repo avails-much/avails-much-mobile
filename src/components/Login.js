@@ -4,16 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 let styles
 
 import {
+	Button,
   Text,
 } from 'react-native-elements'
 
 class Login extends Component {
   render () {
+		const {navigate} = this.props.navigation;
     return (
       <View style={styles.mainContainer}>
-        <Text>
-        Login
-        </Text>
+        <Button
+          onPress={() => navigate('PrayerList', {})}
+          title="Go to PrayerList"
+        />
       </View>
     )
   }

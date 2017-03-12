@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 let styles
 
 import {
+  Button,
   List,
   ListItem,
   Text,
@@ -33,6 +34,10 @@ const list1 = [
 ]
 
 class PrayerList extends Component {
+	static navigationOptions = {
+		title: 'Prayer List',
+  }
+
   constructor () {
     super()
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -54,7 +59,9 @@ class PrayerList extends Component {
   }
 
   render () {
+		const {navigate} = this.props.navigation;
     return (
+			<View>
       <ScrollView keyboardShouldPersistTaps="always" style={styles.mainContainer}>
         <List>
           <ListView
@@ -63,6 +70,11 @@ class PrayerList extends Component {
             />
         </List>
       </ScrollView>
+			<Button
+				onPress={() => navigate('CreatePrayer', {})}
+				title="Add Prayer"
+			/>
+			</View>
     )
   }
 }

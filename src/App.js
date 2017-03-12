@@ -13,6 +13,7 @@ import More from './more/MoreRootContainer'
 
 import Login from './components/Login';
 import PrayerList from './containers/PrayerList';
+import CreatePrayer from './components/CreatePrayer';
 
 let styles = {}
 
@@ -22,6 +23,9 @@ const MainNavigator = StackNavigator({
 	},
 	PrayerList: {
 		screen: PrayerList,
+	},
+	CreatePrayer: {
+		screen: CreatePrayer,
 	},
 });
 
