@@ -3,6 +3,7 @@ import { View, StyleSheet, Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import colors from 'HSColors'
 import fonts from 'HSFonts'
+import { StackNavigator } from 'react-navigation';
 
 import Home from './home/HomeNav'
 import About from './about/AboutRootContainer'
@@ -15,16 +16,19 @@ import PrayerList from './containers/PrayerList';
 
 let styles = {}
 
+const MainNavigator = StackNavigator({
+	Login: {
+		screen: Login,
+	},
+	PrayerList: {
+		screen: PrayerList,
+	},
+});
+
 class App extends Component {
-  constructor () {
-    super()
-  }
   render () {
     return (
-      <View>
-        <Login />
-        <PrayerList />
-      </View>
+			<MainNavigator />
     )
   }
 }
