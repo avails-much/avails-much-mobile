@@ -13,7 +13,9 @@ import {
 } from 'react-native-elements'
 
 function mapStateToProps (state) {
-  return {}
+  return {
+    prayerList: state.app.prayerList
+  }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -21,17 +23,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 const log = () => console.log('this is an example method')
-
-const list1 = [
-  {
-    title: 'Prayer One',
-    icon: 'av-timer'
-  },
-  {
-    title: 'Prayer Two',
-    icon: 'flight-takeoff'
-  }
-]
 
 class PrayerList extends Component {
 	static navigationOptions = {
@@ -42,7 +33,7 @@ class PrayerList extends Component {
     super()
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      dataSource: ds.cloneWithRows(list1)
+      dataSource: ds.cloneWithRows(this.props.prayerList)
     }
     this.renderRow = this.renderRow.bind(this)
   }
