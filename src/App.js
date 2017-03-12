@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import colors from 'HSColors'
 import fonts from 'HSFonts'
 import { StackNavigator } from 'react-navigation';
+import axios from 'axios';
+import { createLogicMiddleware } from 'redux-logic';
 
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
@@ -21,16 +23,37 @@ import CreatePrayer from './components/CreatePrayer';
 import appReducer from './reducers'
 
 import createLogger from 'redux-logger';
+import logic from './logic';
 
-const logger = createLogger();
+const logger = createLogger({
+stateTransformer: (state) => {
+	const newState = {};
+	for (const i of Object.keys(state)) {
+		if (Iterable.isIterable(state[i])) {
+			newState[i] = state[i].toJS();
+		} else {
+			newState[i] = state[i];
+		}
+	}
+	return newState;
+}
+});
+
+const deps = {
+	httpClient: axios.create({ withCredentials: true })
+};
+
+const logicMiddleware = createLogicMiddleware(logic, deps);
 
 const store = createStore(
   appReducer,
   compose(
     applyMiddleware(logger),
+//    applyMiddleware(logicMiddleware, logger),
   )
 );
 console.log('STATE IS: ', store.getState());
+
 
 let styles = {}
 

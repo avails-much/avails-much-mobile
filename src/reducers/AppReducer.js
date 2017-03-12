@@ -20,6 +20,9 @@ export default function (state = defaultState, action) {
     case Constants.CREATE_PRAYER:
       return state.set('prayerList', state.get('prayerList').push(action.payload));
 
+    case Constants.PRAYER_LIST_SUCCESS:
+      return state;
+
     default:
       return state;
   }
