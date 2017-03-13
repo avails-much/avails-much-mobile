@@ -17,7 +17,8 @@ import {
 
 function mapStateToProps (state) {
   return {
-    prayerList: state.app.get('prayerList').toJS()
+    prayerList: state.app.prayerList
+    //prayerList: state.app.get('prayerList').toJS()
   }
 }
 
@@ -36,28 +37,28 @@ class PrayerList extends Component {
 		title: 'Prayer List',
   }
 
-  componentDidMount () {
-		const { onPrayerListSuccess, onPrayerListError } = this.props;
-    console.log('in cdm', PRAYER_LIST_URL);
-    //this.props.onPrayerListPending();
+  constructor () {
+    super()
 
-    /*axios.get(PRAYER_LIST_URL)*/
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(resp => { console.log('data', resp.data); return resp.data })
+    this.renderRow = this.renderRow.bind(this)
+  }
+
+  componentWillMount () {
+		const { onPrayerListSuccess, onPrayerListError } = this.props;
+
+    this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+    console.log('in cdm', PRAYER_LIST_URL);
+    this.props.onPrayerListPending();
+
+    /*axios.get(PRAYER_LIST_URL)
+      .then(resp => { console.log('resp.data', resp.data); return resp.data })
+      .then(data => { console.log('data', data); return data })
       .then(data => onPrayerListSuccess(data))
       .catch(err => {
              console.log('ERROR12334q23423423452345: ', err); // log since could be render err
              onPrayerListError(err);
-      })
-  }
-
-  constructor () {
-    super()
-    /*const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})*/
-    /*this.state = {*/
-    /*dataSource: ds.cloneWithRows(this.props.prayerList)*/
-    /*}*/
-    this.renderRow = this.renderRow.bind(this)
+      })*/
   }
 
   renderRow (rowData, sectionID) {
@@ -74,16 +75,13 @@ class PrayerList extends Component {
   render () {
 		const {navigate} = this.props.navigation;
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const dataSource = ds.cloneWithRows(this.props.prayerList)
-
     return (
 			<View>
       <ScrollView keyboardShouldPersistTaps="always" style={styles.mainContainer}>
         <List>
           <ListView
             renderRow={this.renderRow}
-            dataSource={dataSource}
+            dataSource={this.dataSource.cloneWithRows(this.props.prayerList)}
             />
         </List>
       </ScrollView>

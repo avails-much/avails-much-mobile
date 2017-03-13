@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
 import { createLogicMiddleware } from 'redux-logic';
 
+import { Iterable } from 'immutable';
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
 
@@ -48,8 +49,7 @@ const logicMiddleware = createLogicMiddleware(logic, deps);
 const store = createStore(
   appReducer,
   compose(
-    applyMiddleware(logger),
-//    applyMiddleware(logicMiddleware, logger),
+    applyMiddleware(logicMiddleware, logger),
   )
 );
 console.log('STATE IS: ', store.getState());
