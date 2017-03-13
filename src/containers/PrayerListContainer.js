@@ -17,8 +17,7 @@ import {
 
 function mapStateToProps (state) {
   return {
-    prayerList: state.app.prayerList
-    //prayerList: state.app.get('prayerList').toJS()
+    prayerList: state.app.get('prayerList').toJS()
   }
 }
 
@@ -40,16 +39,25 @@ class PrayerList extends Component {
   constructor () {
     super()
 
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      prayerListItems: ds.cloneWithRows([])
+    };
+
     this.renderRow = this.renderRow.bind(this)
   }
 
-  componentWillMount () {
+  componentWillReceiveProps (newProps) {
+    console.log('newProps: ', newProps);
+  }
+
+  componentDidMount () {
 		const { onPrayerListSuccess, onPrayerListError } = this.props;
 
-    this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    //this.dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.props.onPrayerListPending();
 
     console.log('in cdm', PRAYER_LIST_URL);
-    this.props.onPrayerListPending();
 
     /*axios.get(PRAYER_LIST_URL)
       .then(resp => { console.log('resp.data', resp.data); return resp.data })
@@ -62,11 +70,12 @@ class PrayerList extends Component {
   }
 
   renderRow (rowData, sectionID) {
+    console.log('row Data', rowData);
     return (
       <ListItem
         key={sectionID}
         onPress={log}
-        title={rowData.title}
+        title={rowData.description}
         icon={{name: rowData.icon}}
       />
     )
@@ -74,6 +83,10 @@ class PrayerList extends Component {
 
   render () {
 		const {navigate} = this.props.navigation;
+    const { prayerList } = this.props;
+    let prayerListItems = [];
+
+    console.log('prayerList render: ', prayerList);
 
     return (
 			<View>
@@ -81,7 +94,7 @@ class PrayerList extends Component {
         <List>
           <ListView
             renderRow={this.renderRow}
-            dataSource={this.dataSource.cloneWithRows(this.props.prayerList)}
+            dataSource={this.state.prayerListItems}
             />
         </List>
       </ScrollView>

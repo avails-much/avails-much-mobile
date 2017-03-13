@@ -18,7 +18,7 @@ import Pricing from './pricing/PricingRootContainer'
 import More from './more/MoreRootContainer'
 
 import Login from './components/Login';
-import PrayerList from './containers/PrayerList';
+import PrayerListContainer from './containers/PrayerListContainer';
 import CreatePrayer from './components/CreatePrayer';
 
 import appReducer from './reducers'
@@ -62,7 +62,7 @@ const MainNavigator = StackNavigator({
 		screen: Login,
 	},
 	PrayerList: {
-		screen: PrayerList,
+		screen: PrayerListContainer,
 	},
 	CreatePrayer: {
 		screen: CreatePrayer,

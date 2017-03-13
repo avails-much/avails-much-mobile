@@ -4,10 +4,10 @@ import * as Constants from '../constants';
 export const AppStateRecord = Record({
   prayerList: fromJS([
     {
-      title: 'Prayer One',
+      description: 'Prayer One',
     },
     {
-      title: 'Prayer Two',
+      description: 'Prayer Two',
     }
   ])
 });
