@@ -8,7 +8,7 @@ export const prayerListLogic = createLogic({
 
   process({ httpClient, getState, action }, dispatch, done) {
     console.log('in process');
-    httpClient.get('https://jsonplaceholder.typicode.com/posts')
+    httpClient.get(PRAYER_LIST_URL)
       .then(resp => dispatch(prayerListSuccess(resp.data)))
       .catch(err => {
              //console.error(err); // log since could be render err

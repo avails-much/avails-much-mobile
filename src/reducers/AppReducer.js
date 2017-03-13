@@ -22,7 +22,7 @@ export default function (state = defaultState, action) {
 
     case Constants.PRAYER_LIST_SUCCESS:
       console.log('payload in reducer: ', action.payload);
-      return state.set('prayerList', state.get('prayerList').push(fromJS(action.payload)));
+      return state.set('prayerList', state.get('prayerList').merge(action.payload));
 
     default:
       return state;
