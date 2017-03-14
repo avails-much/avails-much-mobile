@@ -16,6 +16,7 @@ import More from './more/MoreRootContainer'
 
 import Login from './components/Login';
 import PrayerList from './containers/PrayerList';
+import GroupList from './containers/GroupList';
 import CreatePrayer from './components/CreatePrayer';
 
 import appReducer from './reducers'
@@ -35,7 +36,7 @@ console.log('STATE IS: ', store.getState());
 let styles = {}
 
 const MainNavigator = StackNavigator({
-	Login: {
+  Login: {
 		screen: Login,
 	},
 	PrayerList: {
@@ -44,6 +45,9 @@ const MainNavigator = StackNavigator({
 	CreatePrayer: {
 		screen: CreatePrayer,
 	},
+  GroupList: {
+    screen: GroupList,
+  },
 });
 
 class App extends Component {

@@ -17,7 +17,7 @@ import {
 
 function mapStateToProps (state) {
   return {
-    prayerList: state.app.get('prayerList').toJS()
+    groupList: state.app.get('groupList').toJS()
   }
 }
 
@@ -27,9 +27,9 @@ function mapDispatchToProps (dispatch) {
 
 const log = () => console.log('this is an example method')
 
-class PrayerList extends Component {
+class GroupList extends Component {
 	static navigationOptions = {
-		title: 'Prayer List',
+		title: 'My Groups',
   }
 
   constructor () {
@@ -49,7 +49,8 @@ class PrayerList extends Component {
         key={sectionID}
         onPress={log}
         title={rowData.title}
-        subtitle={rowData.description}
+        rightTitle={rowData.ppl_count}
+        subtitle={rowData.created_at}
         icon={{name: rowData.icon}}
       />
     )
@@ -59,7 +60,7 @@ class PrayerList extends Component {
 		const {navigate} = this.props.navigation;
 
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const dataSource = ds.cloneWithRows(this.props.prayerList)
+    const dataSource = ds.cloneWithRows(this.props.groupList)
 
     return (
 			<View style={styles.wrapper}>
@@ -72,16 +73,6 @@ class PrayerList extends Component {
                 />
             </List>
           </ScrollView>
-
-          <View style={styles.addPrayer}>
-            <Icon
-            raised
-            color='#6AAFE6'
-            underlayColor='#6AAFE6'
-            reverse
-            name='add'
-            onPress={() => navigate('CreatePrayer', { })} />
-          </View>
         </View>
         
         <Tabs>
@@ -101,7 +92,7 @@ class PrayerList extends Component {
             // title={selectedTab === 'groups' ? 'GROUPS' : null}
             renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#5e6977'} name='people' size={33} />}
             renderSelectedIcon={() => <Icon color={'#6296f9'} name='people' size={30} />}
-            onPress={() => navigate('GroupList', { }) }
+            onPress={() => navigate('Groups', { }) }
             >
           </Tab>
           <Tab
@@ -127,12 +118,7 @@ styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-  },
-  addPrayer: {
-    position: 'absolute',
-    bottom: 55,
-    right: 10,
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrayerList)
+export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

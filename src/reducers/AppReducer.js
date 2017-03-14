@@ -13,6 +13,23 @@ export const AppStateRecord = Record({
       description: 'more details here',
       created_at: 'Created 5 mins ago',
     }
+  ]),
+  groupList: fromJS([
+    {
+      title: 'FCC Youth',
+      created_at: 'Created 2 mins ago',
+      ppl_count: '35',
+    },
+    {
+      title: 'FBC Ladies',
+      created_at: 'Created 5 mins ago',
+      ppl_count: '102',
+    },
+    {
+      title: 'FC Men',
+      created_at: 'Created 12 days ago',
+      ppl_count: '12',
+    }
   ])
 });
 
