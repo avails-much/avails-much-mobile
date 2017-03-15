@@ -10,8 +10,8 @@ import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
 
 import Login from './components/Login';
-import GroupList from './containers/GroupList';
-import PrayerList from './containers/PrayerList';
+import GroupList from './screens/GroupList';
+import PrayerList from './screens/PrayerList';
 import CreatePrayer from './components/CreatePrayer';
 
 import appReducer from './reducers'
