@@ -1,9 +1,5 @@
-import React from 'react'
-import { AppRegistry } from 'react-native'
-import AppRootContainer from './src/AppRootContainer'
+import React from 'react';
+import { AppRegistry } from 'react-native';
+import App from './src/App';
 
-const HackathonStarter = () => (
-  <AppRootContainer />
-)
-
-AppRegistry.registerComponent('HackathonStarter', () => HackathonStarter)
+AppRegistry.registerComponent('AvailsMuch', () => App)
