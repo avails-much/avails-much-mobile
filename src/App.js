@@ -2,25 +2,47 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StackNavigator } from 'react-navigation';
+import axios from 'axios';
+import { createLogicMiddleware } from 'redux-logic';
 
+import { Iterable } from 'immutable';
 import { Provider } from 'react-redux'
 import { createStore, compose, applyMiddleware } from 'redux'
 
 import Login from './components/Login';
-import PrayerList from './containers/PrayerList';
 import GroupList from './containers/GroupList';
+import PrayerList from './containers/PrayerList';
 import CreatePrayer from './components/CreatePrayer';
 
 import appReducer from './reducers'
 
 import createLogger from 'redux-logger';
+import logic from './logic';
 
-const logger = createLogger();
+const logger = createLogger({
+stateTransformer: (state) => {
+	const newState = {};
+	for (const i of Object.keys(state)) {
+		if (Iterable.isIterable(state[i])) {
+			newState[i] = state[i].toJS();
+		} else {
+			newState[i] = state[i];
+		}
+	}
+	return newState;
+}
+});
+
+const deps = {
+	httpClient: axios.create({ withCredentials: true })
+};
+
+const logicMiddleware = createLogicMiddleware(logic, deps);
 
 const store = createStore(
   appReducer,
   compose(
-    applyMiddleware(logger),
+    applyMiddleware(logicMiddleware, logger),
   )
 );
 console.log('STATE IS: ', store.getState());
@@ -28,7 +50,7 @@ console.log('STATE IS: ', store.getState());
 let styles = {}
 
 const MainNavigator = StackNavigator({
-  Login: {
+	Login: {
 		screen: Login,
 	},
 	PrayerList: {
@@ -37,9 +59,9 @@ const MainNavigator = StackNavigator({
 	CreatePrayer: {
 		screen: CreatePrayer,
 	},
-  GroupList: {
-    screen: GroupList,
-  },
+	GroupList: {
+		screen: GroupList,
+	},
 });
 
 class App extends Component {
