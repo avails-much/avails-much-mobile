@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import colors from 'HSColors'
-import fonts from 'HSFonts'
 import { StackNavigator } from 'react-navigation';
 
 import { Provider } from 'react-redux'
@@ -58,7 +56,7 @@ styles = StyleSheet.create({
   titleStyle: {
     ...Platform.select({
       ios: {
-        fontFamily: fonts.ios.black
+        fontFamily: 'System'
       }
     })
   }
