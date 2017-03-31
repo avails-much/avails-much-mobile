@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
 import Login from './components/Login';
@@ -17,18 +17,49 @@ const store = reduxStore();
 
 let styles = {}
 
+const PrayerTabs = TabNavigator({
+	PrayerList: {
+		screen: PrayerList,
+		navigationOptions: {
+			tabBar: {
+				label: 'Prayer List',
+				icon: ({ tintColor }) => (
+          <Icon
+						containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}}
+						color={'#5e6977'}
+						name='list'
+						size={33}
+					/>
+				),
+			},
+		}
+	},
+	GroupList: {
+		screen: GroupList,
+		navigationOptions: {
+			tabBar: {
+				label: 'Group List',
+				icon: ({ tintColor }) => (
+          <Icon
+						containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}}
+						color={'#5e6977'}
+						name='people'
+						size={33}
+					/>
+				),
+			},
+		}
+	},
+});
 const MainNavigator = StackNavigator({
 	Login: {
 		screen: Login,
 	},
 	PrayerList: {
-		screen: PrayerList,
+		screen: PrayerTabs,
 	},
 	CreatePrayer: {
 		screen: CreatePrayer,
-	},
-	GroupList: {
-		screen: GroupList,
 	},
 });
 

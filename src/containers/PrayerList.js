@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { View, Image, StyleSheet, ScrollView, ListView } from 'react-native'
-
 import { Button, List, ListItem, Text, SearchBar, SocialIcon, Tabs, Tab, Icon } from 'react-native-elements';
 
 function mapStateToProps (state) {
@@ -76,38 +75,7 @@ class PrayerList extends Component {
             onPress={() => navigate('CreatePrayer', { })} />
           </View>
         </View>
-        
-        <Tabs>
-          <Tab
-            titleStyle={{fontWeight: 'bold', fontSize: 10}}
-            selectedTitleStyle={{marginTop: -1, marginBottom: 6}}
-            // selected={selectedTab === 'list'}
-            // title={selectedTab === 'list' ? 'LIST' : null}
-            renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#5e6977'} name='list' size={33} />}
-            renderSelectedIcon={() => <Icon color={'#6296f9'} name='list' size={30} />}
-            onPress={() => navigate('PrayerList', { }) }>
-          </Tab>
-          <Tab
-            titleStyle={{fontWeight: 'bold', fontSize: 10}}
-            selectedTitleStyle={{marginTop: -1, marginBottom: 6}}
-            // selected={selectedTab === 'groups'}
-            // title={selectedTab === 'groups' ? 'GROUPS' : null}
-            renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#5e6977'} name='people' size={33} />}
-            renderSelectedIcon={() => <Icon color={'#6296f9'} name='people' size={30} />}
-            onPress={() => navigate('GroupList', { }) }
-            >
-          </Tab>
-          <Tab
-            titleStyle={{fontWeight: 'bold', fontSize: 10}}
-            selectedTitleStyle={{marginTop: -1, marginBottom: 6}}
-            // selected={selectedTab === 'profile'}
-            // title={selectedTab === 'profile' ? 'PROFILE' : null}
-            renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}} color={'#5e6977'} name='description' size={33} />}
-            renderSelectedIcon={() => <Icon color={'#6296f9'} name='description' size={30} />}
-            // onPress={() => navigate('Journal', { }) }
-            >
-          </Tab>
-        </Tabs>
+
       </View>
     )
   }
