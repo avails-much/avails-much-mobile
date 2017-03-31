@@ -30,6 +30,20 @@ export const AppStateRecord = Record({
       created_at: 'Created 12 days ago',
       ppl_count: '12',
     }
+  ]),
+  journalList: fromJS([
+    {
+      title: 'Day 1',
+      created_at: 'Created 5 days ago',
+    },
+    {
+      title: 'Day 2',
+      created_at: 'Created 2 days ago',
+    },
+    {
+      title: 'Day 3',
+      created_at: 'Created 5 mins ago',
+    }
   ])
 }, 'AppStateRecord');
 

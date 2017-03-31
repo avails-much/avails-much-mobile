@@ -8,6 +8,7 @@ import Login from './components/Login';
 import GroupList from './containers/GroupList';
 import PrayerList from './containers/PrayerList';
 import CreatePrayer from './components/CreatePrayer';
+import Journal from './containers/Journal';
 
 import appReducer from './reducers'
 
@@ -22,7 +23,7 @@ const PrayerTabs = TabNavigator({
 		screen: PrayerList,
 		navigationOptions: {
 			tabBar: {
-				label: 'Prayer List',
+				label: 'Prayers',
 				icon: ({ tintColor }) => (
           <Icon
 						containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}}
@@ -38,12 +39,28 @@ const PrayerTabs = TabNavigator({
 		screen: GroupList,
 		navigationOptions: {
 			tabBar: {
-				label: 'Group List',
+				label: 'Groups',
 				icon: ({ tintColor }) => (
           <Icon
 						containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}}
 						color={'#5e6977'}
 						name='people'
+						size={33}
+					/>
+				),
+			},
+		}
+	},
+	Journal: {
+		screen: Journal,
+		navigationOptions: {
+			tabBar: {
+				label: 'Journal',
+				icon: ({ tintColor }) => (
+          <Icon
+						containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 12}}
+						color={'#5e6977'}
+						name='description'
 						size={33}
 					/>
 				),
