@@ -31,7 +31,7 @@ export const AppStateRecord = Record({
       ppl_count: '12',
     }
   ])
-});
+}, 'AppStateRecord');
 
 const defaultState = new AppStateRecord();
 
