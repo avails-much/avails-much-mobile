@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { View, Image, StyleSheet, ScrollView, ListView } from 'react-native'
-let styles
 
-import {
-  Button,
-  List,
-  ListItem,
-  Text,
-  SearchBar,
-  SocialIcon,
-  Tabs, 
-  Tab, 
-  Icon
-} from 'react-native-elements';
+import { Button, List, ListItem, Text, SearchBar, SocialIcon, Tabs, Tab, Icon } from 'react-native-elements';
 
 function mapStateToProps (state) {
   return {
@@ -32,12 +21,19 @@ class PrayerList extends Component {
 		title: 'Prayer List',
   }
 
-  constructor () {
-    super()
-    /*const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})*/
-    /*this.state = {*/
-    /*dataSource: ds.cloneWithRows(this.props.prayerList)*/
-    /*}*/
+  constructor (props) {
+    super(props)
+
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name;
+
+		// DataSource configured
+		const ds = new ListView.DataSource({ rowHasChanged });
+
+		// Datasource is always in state
+		this.state = {
+			dataSource: ds.cloneWithRows(this.props.prayerList)
+		};
+
     this.renderRow = this.renderRow.bind(this)
   }
 
@@ -56,10 +52,7 @@ class PrayerList extends Component {
   }
 
   render () {
-		const {navigate} = this.props.navigation;
-
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const dataSource = ds.cloneWithRows(this.props.prayerList)
+		const { navigate } = this.props.navigation;
 
     return (
 			<View style={styles.wrapper}>
@@ -68,7 +61,7 @@ class PrayerList extends Component {
             <List>
               <ListView
                 renderRow={this.renderRow}
-                dataSource={dataSource}
+                dataSource={this.state.dataSource}
                 />
             </List>
           </ScrollView>
@@ -120,7 +113,7 @@ class PrayerList extends Component {
   }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#ebedf1',
     height: "100%",
