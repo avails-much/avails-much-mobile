@@ -3,8 +3,6 @@ import axios from 'axios';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import immutableTransform from 'redux-persist-transform-immutable';
-import { createLogger } from 'redux-logger';
-import { Iterable } from 'immutable';
 import { createLogicMiddleware } from 'redux-logic';
 import { AsyncStorage } from 'react-native';
 import rootReducer from '../reducers/index';
@@ -19,20 +17,6 @@ const deps = {
 
 const logicMiddleware = createLogicMiddleware(logic, deps);
 
-const logger = createLogger({
-  stateTransformer: (state) => {
-    const newState = {};
-    for (const i of Object.keys(state)) {
-      if (Iterable.isIterable(state[i])) {
-        newState[i] = state[i].toJS();
-      } else {
-        newState[i] = state[i];
-      }
-    }
-    return newState;
-  }
-});
-
 const persistConfig = {
   storage: AsyncStorage,
   transforms: [immutableTransform({
@@ -40,9 +24,17 @@ const persistConfig = {
   })],
 };
 
-const createStoreWithMiddleware = compose(
+/* Enable redux dev tools only in development.
+  * Use the standalone React Native Debugger extension:
+  * https://github.com/jhen0409/react-native-debugger
+  */
+/* eslint-disable no-undef */
+const composeEnhancers = (__DEV__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+/* eslint-enable no-undef */
+
+const createStoreWithMiddleware = composeEnhancers(
   autoRehydrate(),
-  applyMiddleware(logicMiddleware, __DEV__ ? logger : undefined),
+  applyMiddleware(logicMiddleware),
 )(createStore);
 
 export default function configureStore(initialState) {
