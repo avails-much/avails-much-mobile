@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-    "lint": "eslint './src/**/*.js'",
+		"lint": "eslint './src/**/*.js'",
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest"
 	},
@@ -11,9 +11,9 @@
 		"axiom": "^0.1.6",
 		"axios": "^0.15.3",
 		"immutable": "^3.8.1",
-		"react": "~15.4.1",
+		"react": "16.0.0-alpha.6",
 		"react-logger": "^1.1.0",
-		"react-native": "0.42.0",
+		"react-native": "0.43.4",
 		"react-native-elements": "^0.9.7",
 		"react-native-vector-icons": "^4.0.0",
 		"react-navigation": "^1.0.0-beta.7",
